@@ -1,4 +1,10 @@
 const fs = require("fs");
+let fileName = "test node write.csv";
+
+fs.rmSync(fileName, {
+    force: true,
+});
+
 
 let learningHours = 12,
     wantedHour = 28,
@@ -22,14 +28,12 @@ let noMasCore = parseFloat(noMas / days).toFixed(2);
 let exerciseScore = parseFloat(exercise / days).toFixed(2);
 
 
-let document = "learning: ," + learningHours + " / " + wantedHour + " , " + learningHourScore + "\nno mas: ," + noMas + " / " + days + "," + noMasCore + "\nexercise: ," + exercise + " / " + days + "," + exerciseScore + "\nfinal: ," + finalScore;
+let doc =
+    `,percent,score
+learning hour: ,${learningHours + " | " + wantedHour},${learningHourScore}
+noMas: ,${noMas + " | " + days},${noMasCore}
+exercise: ,${exercise + " | " + days},${exerciseScore}
+final: , ,${finalScore}`;
 
-let doc = `,percent,score\n
-           learning hour: ,${learningHours + "/" + wantedHour}, ${learningHourScore}\n
-           noMas: ,${noMas + "/" + days}, ${noMasCore}\n
-           exercise: ,${exercise + "/" + days}, ${exerciseScore}\n
-           final: ,, ${finalScore}\n
-           `;
-
-fs.writeFile("test node write.csv", document, () => {
+fs.writeFile(fileName, doc, () => {
 });
