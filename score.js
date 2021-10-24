@@ -5,19 +5,31 @@ let learningHours = 12,
     noMas = 6,
     exercise = 7,
     days = 7,
-    lWeight = 0.8,
-    nWeight = 0.05,
-    eWeight = 0.15;
+    lWeight = 0.9,
+    nWeight = 0.04,
+    eWeight = 0.06;
 
-let res =
+let finalScore =
     (learningHours / wantedHour) * lWeight +
     (noMas / days) * nWeight +
     (exercise / days) * eWeight;
 
-res = parseFloat(res).toFixed(2);
+finalScore = parseFloat(finalScore).toFixed(2);
 
 
-let document = "learning: ," + learningHours + " / " + wantedHour + " , " + parseFloat(learningHours / wantedHour).toFixed(2) + "\nno mas: ," + noMas + " / " + days + "," + parseFloat(noMas / days).toFixed(2) + "\nexercise: ," + exercise + " / " + days + "," + parseFloat(exercise / days).toFixed(2) + "\nfinal: ," + res;
+let learningHourScore = parseFloat(learningHours / wantedHour).toFixed(2);
+let noMasCore = parseFloat(noMas / days).toFixed(2);
+let exerciseScore = parseFloat(exercise / days).toFixed(2);
+
+
+let document = "learning: ," + learningHours + " / " + wantedHour + " , " + learningHourScore + "\nno mas: ," + noMas + " / " + days + "," + noMasCore + "\nexercise: ," + exercise + " / " + days + "," + exerciseScore + "\nfinal: ," + finalScore;
+
+let doc = `,percent,score\n
+           learning hour: ,${learningHours + "/" + wantedHour}, ${learningHourScore}\n
+           noMas: ,${noMas + "/" + days}, ${noMasCore}\n
+           exercise: ,${exercise + "/" + days}, ${exerciseScore}\n
+           final: ,, ${finalScore}\n
+           `;
 
 fs.writeFile("test node write.csv", document, () => {
 });
