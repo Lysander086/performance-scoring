@@ -6,11 +6,11 @@ fs.rmSync(fileName, {
 });
 
 
-let learningHours = 22.29,
-    wantedHour = 23,
+let learningHours = 22.25,
+    wantedHour = 25,
     hardWantedHours = 28,
     noMas = 5,
-    exercise = 7,
+    exercise = 6,
     days = 7,
     lWeight = 0.8,
     nWeight = 0.04,
