@@ -68,5 +68,7 @@ yarn-error.log*
 *.sln
 *.sw*
 
+tmp
 package-lock.json
 *.csv
+*.zip
