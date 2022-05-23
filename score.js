@@ -6,9 +6,9 @@ fs.rmSync(fileName, {
 });
 
 
-let learningHours = 22.25,
-    hardWantedHours = 28,
-    noMas = 5,
+let learningHours = 14,
+    hardWantedHours = 30,
+    noMas = 6,
     exercise = 6,
     days = 7,
     lWeight = 0.8,
@@ -22,14 +22,14 @@ let ultimateScore = (learningHours / hardWantedHours) * lWeight +
 
 ultimateScore = parseFloat(ultimateScore).toFixed(2);
 
-
+let learningScore = parseFloat(`${learningHours / hardWantedHours}`).toFixed(2);
 let noMasCore = parseFloat(`${noMas / days}`).toFixed(2);
 let exerciseScore = parseFloat(`${exercise / days}`).toFixed(2);
 
 
 let doc =
     `,percent ,score ,weight
-learning hour: ,${learningHours + " | " +   hardWantedHours}, , ${lWeight}
+learning hour: ,${learningHours + " | " +   hardWantedHours}, ${learningScore}, ${lWeight}
 noMas: ,${noMas + " | " + days},${noMasCore}, ${nWeight}
 exercise: ,${exercise + " | " + days},${exerciseScore}, ${eWeight}
 final: , , , ${ultimateScore} (h)`;
