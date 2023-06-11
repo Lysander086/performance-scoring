@@ -15,9 +15,11 @@ let focusHours = 24,
     nWeight = 0.04,
     eWeight = 0.16;
 
+const exerciseTimes = 16;
+
 let ultimateScore = (focusHours / hardWantedHours) * lWeight +
     (noMas / days) * nWeight +
-    (exercise / days) * eWeight;
+    (exercise / exerciseTimes) * eWeight;
 
 ultimateScore = parseFloat(ultimateScore).toFixed(2);
 
@@ -30,7 +32,7 @@ let doc =
     `,percent ,score ,weight
 learning hour: ,${focusHours + " | " + hardWantedHours}, ${learningScore}, ${lWeight}
 noMas: ,${noMas + " | " + days},${noMasCore}, ${nWeight}
-exercise: ,${exercise + " | " + days},${exerciseScore}, ${eWeight}
+exercise: ,${exercise + " | " + exerciseTimes},${exerciseScore}, ${eWeight}
 final: , , , ${ultimateScore} (h)`;
 
 fs.writeFile(fileName, doc, () => {
