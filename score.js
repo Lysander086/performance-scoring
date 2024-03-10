@@ -7,11 +7,11 @@ fs.rmSync(fileName, {
 });
 
 // try to interpret the below code
-let focusHours = 26.75,
-    hardWantedHours =  48,
-    noMas = 5,
-    exercise = 6,
-    lWeight = 0.88,
+let focusHours =  17,
+    hardWantedHours =  28 ,
+    noMas = 6,
+    exercise = 5 ,
+    lWeight = 0.8,
     nWeight = 0.04,
     eWeight = 0.08;
 
@@ -32,7 +32,7 @@ let exerciseScore = parseFloat(`${exercise / exerciseTimes}`).toFixed(2);
 
 let doc =
     `,percent ,score ,weight
-learning hour: ,${focusHours + " | " + hardWantedHours}, ${learningScore}, ${lWeight}
+focus hours: ,${focusHours + " | " + hardWantedHours}, ${learningScore}, ${lWeight}
 noMas: ,${noMas + " | " + days},${noMasCore}, ${nWeight}
 exercise: ,${exercise + " | " + exerciseTimes},${exerciseScore}, ${eWeight}
 final: , , , ${ultimateScore} (h)`;
