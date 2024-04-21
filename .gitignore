@@ -72,3 +72,4 @@ tmp
 package-lock.json
 *.csv
 *.zip
+/venv
