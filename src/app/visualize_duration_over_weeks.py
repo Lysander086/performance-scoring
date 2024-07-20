@@ -6,7 +6,7 @@ import os
 
 def plot(config: Config):
     # Path pattern for the weekly report CSV files
-    file_pattern = os.path.join(config.resource_dir, 'weekly', "report_week_*.csv")
+    file_pattern = os.path.join(config.resource_dir, 'weekly_entries', "report_week_*.csv")
 
     # Read all CSV files matching the pattern
     all_files = glob.glob(file_pattern)
@@ -31,29 +31,33 @@ def plot(config: Config):
     combined_data['Duration'] = pd.to_timedelta(combined_data['Duration'])
 
     # Group by 'week' and sum the 'Duration'
-    weekly_wasted_time = combined_data.groupby('week')['Duration'].sum().reset_index()
+    weekly_hours = combined_data.groupby('week')['Duration'].sum().reset_index()
 
     # Convert the summed durations to total hours for easier plotting
-    weekly_wasted_time['Duration'] = weekly_wasted_time['Duration'].dt.total_seconds() / 3600
+    weekly_hours['Duration'] = weekly_hours['Duration'].dt.total_seconds() / 3600
 
     # Ensure all weeks from 1 to 29 are included, with 0 hours for missing weeks
     all_weeks = pd.DataFrame({'week': range(1, 30)})
     # delete the below 2 lines. TODO
     all_weeks.to_csv('all_weeks.csv', index=False)
-    weekly_wasted_time.to_csv('weekly_wasted_time.csv', index=False)
-    weekly_wasted_time = pd.merge(all_weeks, weekly_wasted_time, on='week', how='left').fillna(0)
+    weekly_hours.to_csv('weekly_hours.csv', index=False)
+    weekly_hours = pd.merge(all_weeks, weekly_hours, on='week', how='left').fillna(0)
 
     # Plot the dependency of wasted time over weeks
     plt.figure(figsize=(10, 6))
-    plt.plot(weekly_wasted_time['week'], weekly_wasted_time['Duration'], marker='o')
-    plt.title('Wasted Time Over Weeks')
+    plt.plot(weekly_hours['week'], weekly_hours['Duration'], marker='o')
+    plt.title('Duration Over Weeks')
     plt.xlabel('Week')
-    plt.ylabel('Wasted Time (Hours)')
+    plt.ylabel('Duratoin (Hours)')
     plt.grid(True)
-    plt.xticks(weekly_wasted_time['week'])
+    plt.xticks(weekly_hours['week'])
     plt.tight_layout()
 
-    plt.savefig("wasted_time_over_weeks.png")
+    # Create the output directory if it doesn't exist
+    os.makedirs(os.path.join(config.resource_dir, 'output'), exist_ok=True)
+
+    # Save the plot as an image file
+    plt.savefig(os.path.join(config.resource_dir, 'output', 'duration_over_weeks.png'))
     plt.show()
 
 if __name__ == '__main__':
