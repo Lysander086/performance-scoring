@@ -7,10 +7,10 @@ fs.rmSync(fileName, {
 });
 
 // try to interpret the below code
-let focusHours =  17,
-    hardWantedHours =  28 ,
-    noMas = 6,
-    exercise = 5 ,
+let focusHours =  16.75,
+    hardWantedHours =  33 ,
+    noMas = 3,
+    exercise = 4 ,
     lWeight = 0.8,
     nWeight = 0.04,
     eWeight = 0.08;
