@@ -7,10 +7,7 @@ import re
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
-
-# Set the timezone
-os.environ['TZ'] = 'Asia/Tokyo'
+load_dotenv()  
 timezone = pytz.timezone('Asia/Tokyo')
 
 # Function to fetch and parse ICS data
@@ -109,7 +106,7 @@ url = os.getenv('TICKTICK_SUBSCRIPTION_URL')
 
 # Fetch and process ICS data
 ics_data = fetch_ics_data(url)
-dt = datetime.now(timezone) + timedelta(days=0)
+dt = datetime.now() + timedelta(days=0)
 events = extract_events(ics_data, dt)
 config = Config()
 
