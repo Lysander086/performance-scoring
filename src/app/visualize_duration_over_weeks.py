@@ -6,7 +6,7 @@ import os
 
 def plot(config: Config):
     # Path pattern for the weekly report CSV files
-    file_pattern = os.path.join(config.resource_dir, 'weekly_entries', "report_week_*.csv")
+    file_pattern = os.path.join(config.resource_dir, 'weekly_entries', "week_duration_*.csv")
 
     # Read all CSV files matching the pattern
     all_files = glob.glob(file_pattern)
@@ -38,9 +38,6 @@ def plot(config: Config):
 
     # Ensure all weeks from 1 to 29 are included, with 0 hours for missing weeks
     all_weeks = pd.DataFrame({'week': range(1, 30)})
-    # delete the below 2 lines. TODO
-    all_weeks.to_csv('all_weeks.csv', index=False)
-    weekly_hours.to_csv('weekly_hours.csv', index=False)
     weekly_hours = pd.merge(all_weeks, weekly_hours, on='week', how='left').fillna(0)
 
     # Plot the dependency of wasted time over weeks

@@ -1,21 +1,23 @@
 import os
 import csv
+from app.config.configuration import Config
 
+config = Config()
 # Remove the file if it exists
-file_name = "report.csv"
+file_name = "main_weekly_report.csv"
 if os.path.exists(file_name):
     os.remove(file_name)
 
 # Variables
-focus_hours = 16.75
-hard_wanted_hours = 33
+focus_hours = 29
+hard_wanted_hours = 91
 no_mas =  4
-exercise = 4
+exercise = 5
 l_weight = 0.8
 n_weight = 0.04
 e_weight = 0.08
 days = 7
-exercise_times = 7
+exercise_times = 14
 
 # Calculate scores
 ultimate_score = (focus_hours / hard_wanted_hours) * l_weight + \
@@ -38,7 +40,7 @@ doc = [
 ]
 
 # Write to CSV
-with open(file_name, 'w', newline='') as file:
+with open(os.path.join(config.resource_dir, file_name), 'w', newline='') as file:
     writer = csv.writer(file)
     writer.writerows(doc)
 

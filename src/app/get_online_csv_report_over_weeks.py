@@ -65,7 +65,7 @@ def fetch_reports_for_weeks(config: Config):
         os.makedirs(os.path.join(config.resource_dir, 'weekly_entries'), exist_ok=True)
         
         # Save response content to file
-        with open(os.path.join(config.resource_dir, 'weekly_entries', f'report_week_{week+1}.csv'), 'wb') as f:
+        with open(os.path.join(config.resource_dir, 'weekly_entries', f'week_duration_{week+1}.csv'), 'wb') as f:
             f.write(response.content)
         start_date += one_week
 
