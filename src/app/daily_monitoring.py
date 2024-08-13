@@ -45,10 +45,10 @@ def fetch_ics_data(url):
 
 class Event:
     def __init__(self, start, end, title, description):
-        self.start = start
-        self.end = end
-        self.title = title
-        self.description = description
+        self.start: float = start
+        self.end: float = end
+        self.title: str = title
+        self.description: str = description
 
     def toText(self):
         # Convert timestamps back to datetime with timezone for display
@@ -57,7 +57,7 @@ class Event:
 
         start_time = start_dt.strftime('%H:%M')
         end_time = end_dt.strftime('%H:%M')
-        return f"\n{start_dt.strftime('%Y/%m/%d')}\n{start_time}-{end_time}\n任務名: {self.title}"
+        return f"{start_dt.strftime('%Y/%m/%d')}\n{start_time}-{end_time}\n任務名: {self.title}\n"
 
 
 def extract_events(ics_data: str, sdt: date = date.today() + timedelta(days=1)) -> list:
@@ -78,15 +78,11 @@ def extract_events(ics_data: str, sdt: date = date.today() + timedelta(days=1)) 
             else:
                 raise ValueError("Invalid DTSTART value")
 
-            end = component.get('DTEND').dt if component.get('DTEND') else start + timedelta(hours=1)
-
-            # Convert end to timestamp
-            if isinstance(end, datetime):
-                end_timestamp = end.timestamp()
-            elif isinstance(end, date):
-                end_timestamp = datetime.combine(end, datetime.min.time()).timestamp()
+            end = component.get('DTEND').dt if component.get('DTEND') else start + timedelta(hours=1) 
+            if  isinstance(end, datetime) == False:
+                end_timestamp = datetime.combine(end, datetime.max.time()).timestamp()
             else:
-                end_timestamp = start_timestamp + 3600  # Default to one hour after start
+                end_timestamp = end.timestamp() 
 
             title: str = component.get('SUMMARY')
             description: str = component.get('DESCRIPTION', '')
@@ -114,5 +110,5 @@ with open(os.path.join(config.resource_dir, 'output', f'{dt.strftime("%m-%d")}.m
     f.write("Zede's One day\n")
     # Output events
     for event in events:
-        f.write(event.toText() + "\n")
-        f.write("\n" + "-"*50 + "\n")
+        f.write(event.toText() )
+        f.write("-"*50 + "\n")
