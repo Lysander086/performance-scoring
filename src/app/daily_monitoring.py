@@ -93,7 +93,7 @@ def extract_events(ics_data: str, sdt: date = date.today() + timedelta(days=1)) 
 
     # Sort events by start timestamp
     events.sort(key=lambda event: event.start)
-
+ 
     return events
 
 
@@ -102,7 +102,7 @@ url = os.getenv('TICKTICK_SUBSCRIPTION_URL')
 
 # Fetch and process ICS data
 ics_data = fetch_ics_data(url)
-dt = datetime.now() + timedelta(days=0)
+dt = datetime.now() + timedelta(days=1)
 events = extract_events(ics_data, dt)
 config = Config()
 

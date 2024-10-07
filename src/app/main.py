@@ -9,10 +9,10 @@ if os.path.exists(file_name):
     os.remove(file_name)
 
 # Variables
-focus_hours = 29
-hard_wanted_hours = 91
-no_mas =  4
-exercise = 5
+focus_hours = 10
+hard_wanted_hours = 85
+no_mas = 4
+exercise = 2
 l_weight = 0.8
 n_weight = 0.04
 e_weight = 0.08
@@ -44,4 +44,4 @@ with open(os.path.join(config.resource_dir, file_name), 'w', newline='') as file
     writer = csv.writer(file)
     writer.writerows(doc)
 
-print("Report generated.")
+print(f"Report generated.: {file_name}")
